@@ -9,6 +9,7 @@ RUN apt-get update && \
     apt-get install wget=${wgetVersion} ca-certificates=${caCertificatesVersion} \
     -y --no-install-recommends && \
     apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
     wget --progress=dot:giga "https://download-cdn.jetbrains.com/idea/ideaIC-${intellijVersion}.tar.gz" && \
     tar xvf "ideaIC-${intellijVersion}.tar.gz" && \
     rm "ideaIC-${intellijVersion}.tar.gz"  && \
