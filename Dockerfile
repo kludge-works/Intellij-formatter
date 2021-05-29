@@ -17,3 +17,17 @@ RUN apt-get update && \
 
 FROM ubuntu:21.04
 COPY --from=downloader /downloads/intellij /opt/intellij
+
+RUN mkdir -p /home/headless && \
+    groupadd -r headless &&\
+    useradd -r -g headless -d /home/app -s /sbin/nologin -c "Docker image user" headless
+
+# Set the home directory to our app user's home.
+ENV HOME=/home/headless
+
+
+# Chown all the files to the app user.
+RUN chown -R headless:headless /opt/intellij
+
+# Change to the app user.
+USER headless
