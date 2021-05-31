@@ -25,7 +25,6 @@ RUN mkdir -p /home/headless && \
 # Set the home directory to our app user's home.
 ENV HOME=/home/headless
 
-
 # Chown all the files to the app user.
 RUN chown -R headless:headless /opt/intellij
 
