@@ -1,4 +1,4 @@
-FROM ubuntu:21.04 AS downloader
+FROM ubuntu@sha256:42d5c74d24685935e6167271ebb74c5898c5adf273dae80a82f9e39e8ae0dab4 AS downloader
 ARG intellijVersion=2021.1.1
 WORKDIR /downloads/
 
@@ -15,7 +15,7 @@ RUN apt-get update && \
     rm "ideaIC-${intellijVersion}.tar.gz"  && \
     mv idea-* intellij
 
-FROM ubuntu:21.04
+FROM ubuntu@sha256:42d5c74d24685935e6167271ebb74c5898c5adf273dae80a82f9e39e8ae0dab4
 COPY --from=downloader /downloads/intellij /opt/intellij
 
 RUN mkdir -p /home/headless && \
