@@ -1,4 +1,4 @@
-FROM ubuntu@sha256:42d5c74d24685935e6167271ebb74c5898c5adf273dae80a82f9e39e8ae0dab4 AS downloader
+FROM ubuntu@sha256:86ac87f73641c920fb42cc9612d4fb57b5626b56ea2a19b894d0673fd5b4f2e9 AS downloader
 ARG intellijVersion=2021.1.1
 WORKDIR /downloads/
 
@@ -15,7 +15,7 @@ RUN apt-get update && \
     rm "ideaIC-${intellijVersion}.tar.gz"  && \
     mv idea-* intellij
 
-FROM ubuntu@sha256:42d5c74d24685935e6167271ebb74c5898c5adf273dae80a82f9e39e8ae0dab4
+FROM ubuntu@sha256:86ac87f73641c920fb42cc9612d4fb57b5626b56ea2a19b894d0673fd5b4f2e9
 COPY --from=downloader /downloads/intellij /opt/intellij
 
 RUN mkdir -p /home/headless && \
