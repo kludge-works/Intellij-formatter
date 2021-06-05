@@ -2,11 +2,11 @@ FROM ubuntu@sha256:86ac87f73641c920fb42cc9612d4fb57b5626b56ea2a19b894d0673fd5b4f
 ARG intellijVersion=2021.1.1
 WORKDIR /downloads/
 
-ENV caCertificatesVersion=20210119build1
-ENV wgetVersion=1.21-1ubuntu3
+# ENV caCertificatesVersion=20210119build1
+# ENV wgetVersion=1.21-1ubuntu3
 
 RUN apt-get update && \
-    apt-get install wget=${wgetVersion} ca-certificates=${caCertificatesVersion} \
+    apt-get install wget ca-certificates \
     -y --no-install-recommends && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
