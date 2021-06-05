@@ -18,15 +18,20 @@ RUN apt-get update && \
 FROM ubuntu@sha256:86ac87f73641c920fb42cc9612d4fb57b5626b56ea2a19b894d0673fd5b4f2e9
 COPY --from=downloader /downloads/intellij /opt/intellij
 
-RUN mkdir -p /home/headless && \
+RUN apt-get update && \
+    apt-get install git \
+    -y --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /home/headless && \
     groupadd -r headless &&\
-    useradd -r -g headless -d /home/app -s /sbin/nologin -c "Docker image user" headless
+    useradd -r -g headless -d /home/headless -s /sbin/nologin -c "Docker image user" headless
 
-# Set the home directory to our app user's home.
+# Set the home directory to our user's home.
 ENV HOME=/home/headless
 
-# Chown all the files to the app user.
-RUN chown -R headless:headless /opt/intellij
+# Chown all the files to the headless user.
+RUN chown -R headless:headless /opt/intellij /home/headless
 
 # Change to the app user.
 USER headless
